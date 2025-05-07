@@ -1,15 +1,15 @@
 let price = 19.5;
-// let cid = [
-//   ["PENNY", 1.01],
-//   ["NICKEL", 2.05],
-//   ["DIME", 3.1],
-//   ["QUARTER", 4.25],
-//   ["ONE", 90],
-//   ["FIVE", 55],
-//   ["TEN", 20],
-//   ["TWENTY", 60],
-//   ["ONE HUNDRED", 100],
-// ];
+let cid = [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100],
+];
 
 // let cid = [
 //   ["PENNY", 0.5],
@@ -35,24 +35,32 @@ let price = 19.5;
 //   ["ONE HUNDRED", 0],
 // ];
 
-let cid = [
-  ["PENNY", 0.01],
-  ["NICKEL", 0],
-  ["DIME", 0],
-  ["QUARTER", 0],
-  ["ONE", 0],
-  ["FIVE", 0],
-  ["TEN", 0],
-  ["TWENTY", 0],
-  ["ONE HUNDRED", 0],
-];
+// let cid = [
+//   ["PENNY", 0.01],
+//   ["NICKEL", 0],
+//   ["DIME", 0],
+//   ["QUARTER", 0],
+//   ["ONE", 0],
+//   ["FIVE", 0],
+//   ["TEN", 0],
+//   ["TWENTY", 0],
+//   ["ONE HUNDRED", 0],
+// ];
 const priceLabel = document.getElementById("price-label");
 const priceSpan = document.getElementById("price-span");
 const inputValue = document.getElementById("input-cash");
 const purchaseBtn = document.getElementById("purchase-btn");
 let changeDue = document.getElementById("change-due");
-
-priceSpan.textContent = price;
+const itemDetail = document.getElementById("item-detail");
+const cashEntered = document.getElementById("cash-entered");
+const dueSpan = document.getElementById("due-span");
+const cashReceived = document.getElementById("cash-received");
+const cashInDraw = document.getElementById("cash-in-dran");
+const cashInDrawList = document.getElementById("cash-in-draw-list");
+const keyboardContainer = document.getElementById("keyboard-container");
+const totalAmountCid = document.getElementById("total-cid");
+const totalCidSpan = document.getElementById("total-cid-span");
+priceSpan.textContent = `$${price}`;
 
 const totalCid = parseFloat(
   cid
@@ -61,6 +69,7 @@ const totalCid = parseFloat(
     }, 0)
     .toFixed(2)
 );
+totalCidSpan.textContent = `Total Amount in Cid: $${totalCid}`;
 const cashRegister = () => {
   const cash = parseFloat(inputValue.value);
   if (!inputValue.value) {
@@ -78,17 +87,19 @@ const cashRegister = () => {
     const filterNulls = register[change].filter((value) => value[1] !== 0);
 
     if (register.status === "INSUFFICIENT_FUNDS") {
-      console.log(register.status, register.change);
       changeDue.textContent = `Status: ${register.status} ${register.change}`;
+      changeDue.style.color = "red";
     } else if (register.status === "CLOSED") {
       changeDue.textContent = `Status: ${register.status} ${formatter(
         filterNulls
       )}`;
+      changeDue.style.color = "red";
     } else {
       console.log("open", register.change);
       changeDue.textContent = `Status: ${register.status} ${formatter(
         register.change
       )}`;
+      changeDue.style.color = "white";
     }
   }
 };
@@ -107,7 +118,8 @@ const getChange = (price, cash, cid) => {
   };
   const changeArray = [];
   const changeToGive = parseFloat((cash - price).toFixed(2));
-
+  cashReceived.textContent = `$${cash}`;
+  dueSpan.textContent = `$${changeToGive}`;
   let remainingChange = changeToGive;
   for (let i = cid.length - 1; i >= 0; i--) {
     const currencyName = cid[i][0];
@@ -117,14 +129,7 @@ const getChange = (price, cash, cid) => {
     //get the value from cid
     let valueInCid = cid[i][1];
     let returnChange = 0;
-    console.log(
-      "r",
-      remainingChange,
-      "v",
-      valueOfCurrencyUnit,
-      "vci",
-      valueInCid
-    );
+
     while (remainingChange >= valueOfCurrencyUnit && valueInCid > 0) {
       remainingChange = parseFloat(
         (remainingChange - valueOfCurrencyUnit).toFixed(2)
@@ -157,6 +162,16 @@ const getChange = (price, cash, cid) => {
 
 const formatter = (array) =>
   array.map(([name, amount]) => `${name}: $${amount}`).join(" ");
-console.log(formatter(cid));
+
+const formattedCid = formatter(cid);
+cid.forEach(
+  (element, id) =>
+    (cashInDrawList.innerHTML += `<li id="${id}">${element[0]}: $${element[1]}</li>`)
+);
+
+const keyboard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "+", "-"];
+keyboard.forEach((item, index) => {
+  keyboardContainer.innerHTML += `<div class="keyboad" id="${index}">${item}</div>`;
+});
 
 purchaseBtn.addEventListener("click", cashRegister);

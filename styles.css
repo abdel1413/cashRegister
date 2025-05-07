@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+body {
+  color: whitesmoke;
+  background-color: rgb(57, 57, 128);
+}
 main {
   display: flex;
   justify-content: center;
@@ -27,32 +31,107 @@ main > p {
   display: flex;
   flex-direction: initial;
   justify-content: start;
-
   margin-bottom: 0.5rem;
   float: left;
 }
-#price-label {
-  float: left;
-  margin-left: 550px;
-  align-self: flex-start;
+/* #price-label {
+  margin: 10px auto;
+} */
+
+#item-detail {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: auto;
+  padding: 0 5px;
+  font-size: 1.2em;
 }
-#price-span {
-  margin-left: 0.2rem;
+#item-detail > p {
+  font-size: 1.2em;
+}
+#input-section {
+  margin: 15px 0;
 }
 #input-cash {
-  padding: 0.1rem;
+  padding: 0.5rem;
   font-size: 1.2em;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
-.cash-btn {
-  margin-left: 5px;
-  padding: 0.1rem;
+#purchase-btn {
+  /* margin-left: 2px; */
+  padding: 0.5rem;
   font-size: 1.2em;
   cursor: pointer;
+  background-color: lightskyblue;
+  border: 1px solid lightskyblue;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.change-due {
-  margin-top: 0.25em;
-  font-size: 25px;
-  color: rgb(37, 37, 39);
+#purchase-btn:hover {
+  background-color: skyblue;
+  color: black;
+}
+
+#change-due {
+  margin: 1.25em 0;
+  font-size: 1.1em;
+}
+.cash-in-draw {
+  border: 1px solid lightskyblue;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: lightskyblue;
+}
+#cash-in-draw-list {
+  background-color: black;
+  color: white;
+  padding: 0.5em;
+}
+#keyboard-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 4px;
+  width: 100px;
+  height: 100px;
+}
+#keyboard-container > div {
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+#cash-in-draw-list {
+  list-style: none;
+}
+h3 {
+  text-align: center;
+  list-style: upper-alpha;
+  margin-bottom: 5px;
+  color: blue;
+  text-decoration: underline;
+  text-decoration-color: brown;
+}
+#total-cid {
+  margin-top: 1em;
+  width: 100%;
+  border: 2px solid lightskyblue;
+  padding: 0.5em;
+  background-color: lightskyblue;
+  text-align: center;
+  border-radius: 15px;
+}
+#total-cid-span {
+  color: black;
+  text-align: center;
+  font-size: 1.5rem;
 }
