@@ -252,7 +252,7 @@ const getChange = (price, cash, cid) => {
     if (returnChange > 0) {
       changeArray.push([currencyName, returnChange]);
     }
-   
+    //changeArr= [[quarter, .5]]
   }
 console.log('changarray', changeArray)
 
