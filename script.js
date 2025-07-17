@@ -104,6 +104,7 @@ const cashRegister = () => {
       changeDue.style.color = "white";
     }
   }
+    inputValue.value = ""
 };
 
 const getChange = (price, cash, cid) => {
@@ -136,7 +137,7 @@ const getChange = (price, cash, cid) => {
   ["TEN", 20],
   ["TWENTY", 60],
   ["ONE HUNDRED", 100],
-];
+ ];
      */
 
 
@@ -254,7 +255,7 @@ const getChange = (price, cash, cid) => {
     }
     //changeArr= [[quarter, .5]]
   }
-console.log('changarray', changeArray)
+ console.log('changarray', changeArray)
 
   if (remainingChange > 0) {
     return { status: "INSUFFICIENT_FUNDS", change: [] };
@@ -268,6 +269,8 @@ console.log('changarray', changeArray)
   }
 
   return { status: "OPEN", change: changeArray };
+
+
 };
 
 const formatter = (array) =>
